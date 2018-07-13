@@ -15,7 +15,7 @@ const db = knex({
   }
 });
 
-//Helpers
+
 function totalEUR() {
   return new Promise((resolve, reject) => {
     return db("person")
