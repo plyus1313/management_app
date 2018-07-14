@@ -67,6 +67,7 @@ app.get("/", (req, res) => {
     .orderBy("expense", "desc")
     .then(data => {
       data = data.map(item => {
+        item['money']= item['money'].toFixed(2)
         item["expense"] = new Date(item["expense"]);
         item["expense"].setTime(
           item["expense"].getTime() -
