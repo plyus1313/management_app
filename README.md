@@ -4,7 +4,8 @@
 - Run npm install
 - Run npm start
 
-To make the code working, firstly used database setup has to be structured.
+Database setup has to be structured.
+
 Use following SQL Statements :
 
 - CREATE USER “postgres”;
