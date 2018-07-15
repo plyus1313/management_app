@@ -1,6 +1,4 @@
-# management_app
-
-Back-end
+# Back-end
 
 - Clone this repo
 - Run npm install
