@@ -28,7 +28,7 @@ it('should list all expenses / GET',function(done){
 it('should successfully add expense /add PUT',function (done) {
     chai.request(url)
     .put("/add")
-    .send({"name":"test_name","money":15,"currency":"EUR","expense":"2099-07-25"})
+    .send({"name":"test_name","money":"15.00","currency":"EUR","expense":"2099-07-25"})
     .end(function (err, res) {
       res.should.have.status("200");
       chai.request(url)
@@ -37,7 +37,7 @@ it('should successfully add expense /add PUT',function (done) {
         console.log(res.body);
         res.should.have.status("200");
         res.body.should.be.a("array");
-        expect(res.body).to.deep.include.members([{"name":"test_name","money":15,"currency":"EUR","expense":"2099-07-25"}]);
+        expect(res.body).to.deep.include.members([{"name":"test_name","money":"15.00","currency":"EUR","expense":"2099-07-25"}]);
         done();
       });
     })
