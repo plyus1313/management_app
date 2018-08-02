@@ -21,8 +21,7 @@ function totalEUR() {
     return db("person")
       .select(knex.raw("SUM(money) as total"))
       .first()
-      .then(data => {
-        console.log(data);
+      .then(data => {        
         resolve(data["total"]);
       })
       .catch(err => {
@@ -39,15 +38,12 @@ function convert(sum, to, reverse) {
     request(
       "http://data.fixer.io/api/latest?access_key=" + token + "&symbols=" + to,
       function(err, res, body) {
-        if (err) {
-          console.log(to);
+        if (err) {          
           return reject(err);
         }
-        data = JSON.parse(body);
-        console.log(data);
+        data = JSON.parse(body);        
 
-        rate = data["rates"][to];
-        console.log(sum / rate);
+        rate = data["rates"][to];        
         if (reverse) return resolve(sum / rate);
         return resolve(sum * rate);
       }
@@ -93,8 +89,7 @@ app.get("/", (req, res) => {
 app.get("/total", (req, res) => {
   totalEUR()
     .then(total => {
-      convert(total, req.query.currency || "PLN").then(result => {
-        console.log("RES: " + result);
+      convert(total, req.query.currency || "PLN").then(result => {        
         res.json({ total: result });
       });
     })
@@ -107,8 +102,7 @@ app.put("/add", (req, res) => {
   let { name, money, currency, expense } = req.body;
   let date = new Date(expense);
   convert(money, currency || "PLN", true)
-    .then(money_converted => {
-      console.log("RES: " + money_converted);
+    .then(money_converted => {      
       db("person")
         .returning("*")
         .insert({
@@ -141,8 +135,7 @@ app.delete("/clear", (req, res) => {
       res.json(response);
     })
     .catch(err => {
-      res.status(400).json(err);
-      console.log(err);
+      res.status(400).json(err);      
     });
 });
 
