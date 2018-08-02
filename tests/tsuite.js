@@ -33,8 +33,7 @@ it('should successfully add expense /add PUT',function (done) {
       res.should.have.status("200");
       chai.request(url)
       .get("/")
-      .end(function(err, res){
-        console.log(res.body);
+      .end(function(err, res){        
         res.should.have.status("200");
         res.body.should.be.a("array");
         expect(res.body).to.deep.include.members([{"name":"test_name","money":"15.00","currency":"EUR","expense":"2099-07-25"}]);
@@ -47,17 +46,14 @@ it('should successfully delete expense /clear DELETE',function (done) {
     chai.request(url)
     .delete("/clear?expense=2099-07-25")
     .send({"expense":"2099-07-25"})
-    .end(function (err, res) {
-      console.log(res.body);
+    .end(function (err, res) {      
       res.should.have.status("200");
       chai.request(url)
       .get("/")
-      .end(function(err, res){
-        console.log(res.body);
+      .end(function(err, res){        
         res.should.have.status("200");
         res.body.should.be.a("array");
-        expect(res.body).to.not.deep.include.members([{"expense":"2099-07-25"}]);
-        console.log(res.body);
+        expect(res.body).to.not.deep.include.members([{"expense":"2099-07-25"}]);        
         done();
       });
     })
